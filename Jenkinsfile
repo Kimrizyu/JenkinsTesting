@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment {
-        CI = 'true'
-    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -11,27 +9,16 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                 sh 'npm install'
+                sh 'npm install'
             }
         }
-        stage('Run Unit Tests') {
+        stage('Run Tests') {
             steps {
                 sh 'npm test'
             }
         }
-        stage('Build') {
-            steps {
-                echo 'Building the application...'
-
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-    
-            }
-        }
     }
+
     post {
         success {
             echo 'Pipeline finished successfully!'
